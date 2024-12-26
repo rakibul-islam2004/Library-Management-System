@@ -10,7 +10,7 @@ const AllBooksPage = () => {
     const fetchBooks = async () => {
       try {
         const response = await axios.get(
-          "https://library-management-iota-nine.vercel.app/books",
+          "https://library-management-server-ochre.vercel.app/books",
           {
             withCredentials: true,
           }

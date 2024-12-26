@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
@@ -10,7 +9,6 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import AllBooksPage from "./pages/AllBooksPage";
-import BookDetailsPage from "./pages/BookDetailsPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import AddBookPage from "./pages/AddBookPage";
@@ -18,6 +16,8 @@ import BorrowedBooksPage from "./pages/BorrowedBooksPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import PrivateRoute from "./components/PrivateRoute";
 import { useAuth } from "./context/AuthContext";
+import BookDetails from "./pages/BookDetails";
+import UpdateBook from "./pages/UpdateBook";
 
 const App = () => {
   const { user, logout } = useAuth();
@@ -44,10 +44,10 @@ const App = () => {
           }
         />
         <Route
-          path="/book/:id"
+          path="/bookDetails/:id"
           element={
             <PrivateRoute>
-              <BookDetailsPage />
+              <BookDetails />
             </PrivateRoute>
           }
         />
@@ -56,6 +56,22 @@ const App = () => {
           element={
             <PrivateRoute>
               <AddBookPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/bookDetails/:id"
+          element={
+            <PrivateRoute>
+              <BookDetails />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/updateBook/:id"
+          element={
+            <PrivateRoute>
+              <UpdateBook />
             </PrivateRoute>
           }
         />

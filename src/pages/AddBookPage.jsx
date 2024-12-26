@@ -59,7 +59,7 @@ const AddBookPage = () => {
 
       if (response.ok) {
         alert("Book added successfully!");
-        navigate("/allBooks");
+        navigate("/all-books");
       } else {
         const errorData = await response.json();
         alert(`Error adding book: ${errorData.message || response.status}`);
