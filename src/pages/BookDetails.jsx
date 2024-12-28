@@ -13,6 +13,7 @@ const BookDetails = () => {
   const [book, setBook] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [returnDate, setReturnDate] = useState("");
+  const [isAlreadyBorrowed, setIsAlreadyBorrowed] = useState(false);
 
   const loggedInUser = {
     name: user?.displayName || "Guest User",
@@ -37,10 +38,33 @@ const BookDetails = () => {
         console.error("Error fetching book details:", error);
       }
     };
+
+    const checkIfAlreadyBorrowed = async () => {
+      if (!user?.email) return;
+
+      try {
+        const { data } = await axios.get(
+          `https://library-management-server-ochre.vercel.app/borrowedBooks?email=${user.email}`
+        );
+        const isBookBorrowed = data.some(
+          (borrowedBook) => borrowedBook.bookId === id
+        );
+        setIsAlreadyBorrowed(isBookBorrowed);
+      } catch (error) {
+        console.error("Error checking borrowed books:", error);
+      }
+    };
+
     fetchBookDetails();
-  }, [id]);
+    checkIfAlreadyBorrowed();
+  }, [id, user]);
 
   const handleBorrow = async () => {
+    if (isAlreadyBorrowed) {
+      toast.error("You have already borrowed this book.");
+      return;
+    }
+
     if (!returnDate) {
       toast.error("Please select a return date.");
       return;
@@ -102,14 +126,18 @@ const BookDetails = () => {
           </p>
           <button
             className={`w-full py-3 text-lg font-medium rounded-lg ${
-              book.quantity > 0
-                ? "bg-blue-600 text-white hover:bg-blue-700"
-                : "bg-gray-400 text-gray-700 cursor-not-allowed"
+              isAlreadyBorrowed || book.quantity <= 0
+                ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+                : "bg-blue-600 text-white hover:bg-blue-700"
             }`}
-            disabled={book.quantity <= 0}
+            disabled={isAlreadyBorrowed || book.quantity <= 0}
             onClick={() => setIsModalOpen(true)}
           >
-            {book.quantity > 0 ? "Borrow Book" : "Out of Stock"}
+            {isAlreadyBorrowed
+              ? "You Already Borrowed This Book"
+              : book.quantity > 0
+              ? "Borrow Book"
+              : "Out of Stock"}
           </button>
 
           {isModalOpen && (
