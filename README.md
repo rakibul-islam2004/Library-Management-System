@@ -8,7 +8,7 @@ The purpose of this project is to provide a simple yet functional library manage
 
 ## Live URL
 
-You can access the live application [here](https://library-management-system-live-link.com).
+You can access the live application [here](https://lighthearted-blini-802884.netlify.app).
 
 ## Key Features
 
@@ -25,4 +25,3 @@ You can access the live application [here](https://library-management-system-liv
 - **Authentication:** Firebase Authentication, JWT (JSON Web Tokens)
 - **HTTP Client:** Axios
 - **Build Tool:** Vite
-
