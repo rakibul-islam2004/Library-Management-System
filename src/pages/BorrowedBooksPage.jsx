@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const BorrowedBooksPage = () => {
   const [borrowedBooks, setBorrowedBooks] = useState([]);
@@ -9,7 +12,7 @@ const BorrowedBooksPage = () => {
   useEffect(() => {
     const fetchBorrowedBooks = async () => {
       if (!user?.email) {
-        console.error("User email not available.");
+        toast.error("User email not available.");
         return;
       }
 
@@ -28,14 +31,12 @@ const BorrowedBooksPage = () => {
 
   const handleReturn = async (bookId, borrowId) => {
     try {
-      // Request to mark the book as returned
       const returnResponse = await axios.post(
         `https://library-management-server-ochre.vercel.app/returnBook`,
         { bookId, borrowId }
       );
 
       if (returnResponse.status === 200) {
-        // Update the book quantity
         await axios.put(
           `https://library-management-server-ochre.vercel.app/updateQuantity/${bookId}`,
           { quantity: 1 }
@@ -45,15 +46,17 @@ const BorrowedBooksPage = () => {
         setBorrowedBooks((prev) =>
           prev.filter((book) => book._id !== borrowId)
         );
-        console.log("Book returned successfully:", bookId, borrowId);
+        toast.success("Book returned successfully!");
       }
     } catch (error) {
       console.error("Error returning book:", error);
+      toast.error("Failed to return the book. Please try again.");
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
+      <ToastContainer />
       <h1 className="text-2xl font-bold mb-6">Borrowed Books</h1>
       {borrowedBooks.length === 0 ? (
         <p className="text-gray-600">You have not borrowed any books.</p>
@@ -77,7 +80,7 @@ const BorrowedBooksPage = () => {
               </p>
               <p className="text-gray-600">Return Date: {book.returnDate}</p>
               <button
-                onClick={() => handleReturn(book.bookId, book._id)} // Fixed the IDs
+                onClick={() => handleReturn(book.bookId, book._id)}
                 className="mt-4 w-full py-2 px-4 bg-red-600 text-white rounded-lg hover:bg-red-700"
               >
                 Return Book

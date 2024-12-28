@@ -11,6 +11,7 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const AuthContext = createContext();
 
@@ -112,7 +113,7 @@ export const AuthProvider = ({ children }) => {
         Cookies.remove("token");
         setUser(null);
       }
-      setLoading(false);
+      setLoading(false); 
     });
 
     return () => unsubscribe();
@@ -130,7 +131,13 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {loading ? (
+        <div className="flex justify-center items-center h-screen">
+          <ClipLoader size={50} color={"#000"} loading={loading} />
+        </div>
+      ) : (
+        children
+      )}
     </AuthContext.Provider>
   );
 };

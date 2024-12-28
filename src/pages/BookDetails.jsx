@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -40,7 +42,7 @@ const BookDetails = () => {
 
   const handleBorrow = async () => {
     if (!returnDate) {
-      alert("Please select a return date.");
+      toast.error("Please select a return date.");
       return;
     }
 
@@ -65,15 +67,19 @@ const BookDetails = () => {
       );
       setBook((prev) => ({ ...prev, quantity: prev.quantity - 1 }));
       setIsModalOpen(false);
-      alert("Book borrowed successfully!");
+      toast.success("Book borrowed successfully!");
+      setTimeout(() => {
+        navigate("/borrowed-books");
+      }, 1500);
     } catch (error) {
       console.error("Error borrowing book:", error);
-      alert("An error occurred while borrowing the book.");
+      toast.error("An error occurred while borrowing the book.");
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-50 to-blue-100 flex justify-center items-center p-4">
+      <ToastContainer position="top-center" />
       {book ? (
         <div className="max-w-2xl w-full bg-white p-6 rounded-lg shadow-md border">
           <img

@@ -26,7 +26,9 @@ const App = () => {
 
   useEffect(() => {
     document.title =
-      location.pathname === "/" ? "Home" : location.pathname.substring(1);
+      location.pathname === "/"
+        ? "Home - Library Management"
+        : location.pathname.substring(1) + " - Library Management";
   }, [location]);
 
   return (
