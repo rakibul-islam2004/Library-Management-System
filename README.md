@@ -1,8 +1,28 @@
-# React + Vite
+# Library Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web-based application to manage library books, allowing users to add, view, and manage books efficiently.
 
-Currently, two official plugins are available:
+## Purpose
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The purpose of this project is to provide a simple yet functional library management system that supports adding books, viewing their details, and managing inventory.
+
+## Live URL
+
+You can access the live application [here](https://library-management-system-live-link.com).
+
+## Key Features
+
+- Add books with details such as name, author, quantity, category, description, rating, and image.
+- Manage inventory with real-time updates.
+- Secure user authentication and authorization.
+- User-friendly interface built with modern web technologies.
+
+## Technologies Used
+
+- **Frontend:** React, Tailwind CSS, DaisyUI, React Router DOM
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB (without Mongoose)
+- **Authentication:** Firebase Authentication, JWT (JSON Web Tokens)
+- **HTTP Client:** Axios
+- **Build Tool:** Vite
+
