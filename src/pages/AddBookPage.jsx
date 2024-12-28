@@ -71,61 +71,69 @@ const AddBookPage = () => {
   };
 
   return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold text-center mb-8">Add New Book</h1>
+    <div className="container mx-auto max-w-2xl p-6 bg-white shadow-md rounded-lg mt-10">
+      <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
+        Add New Book
+      </h1>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label className="block text-gray-700">Image</label>
+          <label className="block text-gray-700 font-medium mb-2">Image</label>
           <input
             type="file"
             onChange={handleImageChange}
             accept="image/*"
-            className="w-full mt-2 p-2 border rounded-md"
+            className="w-full mt-2 p-3 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
           />
         </div>
         <div>
-          <label className="block text-gray-700">Name</label>
+          <label className="block text-gray-700 font-medium mb-2">Name</label>
           <input
             type="text"
             name="name"
             value={book.name}
             onChange={handleInputChange}
-            className="w-full p-3 border rounded-md"
+            className="w-full p-3 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
             placeholder="Enter book title"
             required
           />
         </div>
         <div>
-          <label className="block text-gray-700">Author Name</label>
+          <label className="block text-gray-700 font-medium mb-2">
+            Author Name
+          </label>
           <input
             type="text"
             name="authorName"
             value={book.authorName}
             onChange={handleInputChange}
-            className="w-full p-3 border rounded-md"
+            className="w-full p-3 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
             placeholder="Enter author's name"
             required
           />
         </div>
         <div>
-          <label className="block text-gray-700">Quantity</label>
+          <label className="block text-gray-700 font-medium mb-2">
+            Quantity
+          </label>
           <input
             type="number"
             name="quantity"
             value={book.quantity}
             onChange={handleInputChange}
-            className="w-full p-3 border rounded-md"
+            className="w-full p-3 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
             min="1"
             required
           />
         </div>
         <div>
-          <label className="block text-gray-700">Category</label>
+          <label className="block text-gray-700 font-medium mb-2">
+            Category
+          </label>
           <select
             name="category"
             value={book.category}
             onChange={handleInputChange}
-            className="w-full p-3 border rounded-md"
+            className="w-full p-3 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
             required
           >
             <option value="">Select Category</option>
@@ -136,25 +144,27 @@ const AddBookPage = () => {
           </select>
         </div>
         <div>
-          <label className="block text-gray-700">Short Description</label>
+          <label className="block text-gray-700 font-medium mb-2">
+            Short Description
+          </label>
           <textarea
             name="shortDescription"
             value={book.shortDescription}
             onChange={handleInputChange}
-            className="w-full p-3 border rounded-md"
+            className="w-full p-3 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
             rows="4"
             placeholder="Enter a short description"
             required
           />
         </div>
         <div>
-          <label className="block text-gray-700">Rating</label>
+          <label className="block text-gray-700 font-medium mb-2">Rating</label>
           <input
             type="number"
             name="rating"
             value={book.rating}
             onChange={handleInputChange}
-            className="w-full p-3 border rounded-md"
+            className="w-full p-3 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
             min="1"
             max="5"
             required
@@ -162,7 +172,7 @@ const AddBookPage = () => {
         </div>
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-all"
+          className="w-full bg-blue-500 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-600 transition-all"
         >
           Add Book
         </button>

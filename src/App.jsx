@@ -18,6 +18,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { useAuth } from "./context/AuthContext";
 import BookDetails from "./pages/BookDetails";
 import UpdateBook from "./pages/UpdateBook";
+import CategoryPage from "./pages/CategoryPage";
 
 const App = () => {
   const { user, logout } = useAuth();
@@ -56,6 +57,14 @@ const App = () => {
           element={
             <PrivateRoute>
               <AddBookPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/category/:category"
+          element={
+            <PrivateRoute>
+              <CategoryPage />
             </PrivateRoute>
           }
         />

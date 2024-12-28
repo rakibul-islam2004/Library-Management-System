@@ -22,7 +22,7 @@ const HomePage = () => {
             {["Fiction", "Science", "History", "Technology"].map(
               (category, index) => (
                 <Link
-                  to={`/category/${category.toLowerCase()}`}
+                  to={`/category/${category}`}
                   key={index}
                   className="bg-white border rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition duration-300"
                 >
