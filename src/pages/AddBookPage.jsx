@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddBookPage = () => {
   const [book, setBook] = useState({
@@ -58,15 +60,19 @@ const AddBookPage = () => {
       );
 
       if (response.ok) {
-        alert("Book added successfully!");
-        navigate("/all-books");
+        toast.success("Book added successfully!");
+        setTimeout(() => {
+          navigate("/all-books");
+        }, 2000); // Redirect after 2 seconds
       } else {
         const errorData = await response.json();
-        alert(`Error adding book: ${errorData.message || response.status}`);
+        toast.error(
+          `Error adding book: ${errorData.message || response.status}`
+        );
       }
     } catch (error) {
       console.error("Error adding book:", error);
-      alert("Failed to add the book. Please try again.");
+      toast.error("Failed to add the book. Please try again.");
     }
   };
 
@@ -177,6 +183,7 @@ const AddBookPage = () => {
           Add Book
         </button>
       </form>
+      <ToastContainer />
     </div>
   );
 };

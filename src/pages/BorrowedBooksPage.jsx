@@ -23,6 +23,7 @@ const BorrowedBooksPage = () => {
         setBorrowedBooks(data);
       } catch (error) {
         console.error("Error fetching borrowed books:", error);
+        toast.error("Failed to load borrowed books. Please try again later.");
       }
     };
 
