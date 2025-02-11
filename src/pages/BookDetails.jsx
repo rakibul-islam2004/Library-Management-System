@@ -4,6 +4,7 @@ import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ClipLoader } from "react-spinners"; // Import ClipLoader
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -207,7 +208,9 @@ const BookDetails = () => {
           )}
         </div>
       ) : (
-        <p className="text-gray-600">Loading...</p>
+        <div className="flex justify-center items-center">
+          <ClipLoader size={50} color="#3498db" loading={true} />
+        </div>
       )}
     </div>
   );
