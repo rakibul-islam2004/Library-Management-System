@@ -4,15 +4,18 @@ import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import ClipLoader from "react-spinners/ClipLoader"; // Import ClipLoader
 
 const BorrowedBooksPage = () => {
   const [borrowedBooks, setBorrowedBooks] = useState([]);
-  const { user } = useAuth(); // Accessing the user object from AuthContext
+  const { user } = useAuth();
+  const [loading, setLoading] = useState(true); // State to track loading status
 
   useEffect(() => {
     const fetchBorrowedBooks = async () => {
       if (!user?.email) {
         toast.error("User email not available.");
+        setLoading(false); // Set loading to false if there's no email
         return;
       }
 
@@ -21,9 +24,11 @@ const BorrowedBooksPage = () => {
           `https://library-management-server-ochre.vercel.app/borrowedBooks?email=${user.email}`
         );
         setBorrowedBooks(data);
+        setLoading(false); // Set loading to false after data is fetched
       } catch (error) {
         console.error("Error fetching borrowed books:", error);
         toast.error("Failed to load borrowed books. Please try again later.");
+        setLoading(false); // Set loading to false if there's an error
       }
     };
 
@@ -59,7 +64,13 @@ const BorrowedBooksPage = () => {
     <div className="min-h-screen bg-gray-100 p-6">
       <ToastContainer />
       <h1 className="text-2xl font-bold mb-6">Borrowed Books</h1>
-      {borrowedBooks.length === 0 ? (
+
+      {loading ? (
+        // Show the spinner loader while data is loading
+        <div className="flex justify-center items-center h-screen">
+          <ClipLoader size={50} color={"#000"} loading={loading} />
+        </div>
+      ) : borrowedBooks.length === 0 ? (
         <p className="text-gray-600">You have not borrowed any books.</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
