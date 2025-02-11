@@ -10,6 +10,7 @@ const AllBooksPage = () => {
   const [loadingBooks, setLoadingBooks] = useState(true);
   const [showAvailable, setShowAvailable] = useState(false);
   const [viewMode, setViewMode] = useState("Card View");
+  const [isSorted, setIsSorted] = useState(false); // State to track sorting
   const navigate = useNavigate();
   const { loading: authLoading } = useAuth();
 
@@ -55,6 +56,14 @@ const AllBooksPage = () => {
     setViewMode(event.target.value);
   };
 
+  const toggleSortByQuantity = () => {
+    const sortedBooks = [...filteredBooks].sort(
+      (a, b) => a.quantity - b.quantity
+    );
+    setFilteredBooks(isSorted ? books : sortedBooks);
+    setIsSorted(!isSorted);
+  };
+
   if (authLoading || loadingBooks) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -67,15 +76,22 @@ const AllBooksPage = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold text-center mb-8">All Books</h1>
 
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-6 flex-wrap">
         <button
           onClick={toggleAvailableBooks}
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-all"
+          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-all mb-2 md:mb-0"
         >
           {showAvailable ? "Show All Books" : "Show Available Books"}
         </button>
 
-        <div>
+        <button
+          onClick={toggleSortByQuantity}
+          className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-all mb-2 md:mb-0"
+        >
+          {isSorted ? "Remove Sort" : "Sort by Ascending Quantities"}
+        </button>
+
+        <div className="flex items-center">
           <label htmlFor="viewMode" className="mr-2">
             View Mode:
           </label>
