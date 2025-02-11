@@ -60,13 +60,13 @@ const Slider = () => {
         {/* Manual Navigation Controls with Custom Arrows */}
         <button
           onClick={prevSlide}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white p-4 rounded-full shadow-xl hover:scale-110 transition duration-300 ease-in-out"
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white p-4 hidden md:block rounded-full shadow-xl hover:scale-110 transition duration-300 ease-in-out"
         >
           <FaArrowLeft className="h-8 w-8 text-gray-800" />
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white p-4 rounded-full shadow-xl hover:scale-110 transition duration-300 ease-in-out"
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white p-4 hidden md:block  rounded-full shadow-xl hover:scale-110 transition duration-300 ease-in-out"
         >
           <FaArrowRight className="h-8 w-8 text-gray-800" />
         </button>
