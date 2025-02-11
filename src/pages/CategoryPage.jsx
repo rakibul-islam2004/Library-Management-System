@@ -49,7 +49,11 @@ const CategoryPage = () => {
   };
 
   if (loading) {
-    return <div>Loading books...</div>;
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <div className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
+      </div>
+    );
   }
 
   return (
@@ -59,7 +63,7 @@ const CategoryPage = () => {
         <p className="text-gray-600">No books found in this category.</p>
       ) : (
         <div className="container mx-auto p-4">
-          <div className="flex justify-between items-center mb-6">
+          <div className="flex flex-wrap justify-between items-center mb-6">
             <button
               onClick={toggleAvailableBooks}
               className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-all"
@@ -67,7 +71,7 @@ const CategoryPage = () => {
               {showAvailable ? "Show All Books" : "Show Available Books"}
             </button>
 
-            <div>
+            <div className="flex items-center mt-4 md:mt-0">
               <label htmlFor="viewMode" className="mr-2">
                 View Mode:
               </label>
@@ -84,7 +88,7 @@ const CategoryPage = () => {
           </div>
 
           {viewMode === "Card View" ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredBooks.map((book) => (
                 <div
                   key={book._id}

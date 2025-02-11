@@ -4,12 +4,12 @@ import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import ClipLoader from "react-spinners/ClipLoader"; // Import ClipLoader
+import ClipLoader from "react-spinners/ClipLoader"; 
 
 const BorrowedBooksPage = () => {
   const [borrowedBooks, setBorrowedBooks] = useState([]);
   const { user } = useAuth();
-  const [loading, setLoading] = useState(true); // State to track loading status
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const fetchBorrowedBooks = async () => {
